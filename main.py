@@ -117,12 +117,12 @@ def get_character_properties(deskewed_img):
             #print upper_start
         if( upper_start!=-1 and find_upper and i/255 < deskewed_img.shape[1]/2):
             '''and horizontal_histogram[loc]>=horizontal_histogram[loc+1] and horizontal_histogram[loc+1] <= horizontal_histogram[loc+2]'''
-            upper_end = loc+1
+            upper_end = loc
             #print upper_end
             find_upper = False
         #and horizontal_histogram[loc]>=horizontal_histogram[loc+1] and horizontal_histogram[loc+1] <= horizontal_histogram[loc+2]
-        if(i/255 < deskewed_img.shape[1]/6 and loc > deskewed_img.shape[0]*3/4 and lower_start==-1 and not find_upper ):
-            lower_start=loc+1
+        if(i/255 < deskewed_img.shape[1]/6 and loc > deskewed_img.shape[0]*2/3 and lower_start==-1 and not find_upper ):
+            lower_start=loc
             break
 
     #lower_start=horizontal_histogram[upper_end:].argmin()
@@ -131,12 +131,12 @@ def get_character_properties(deskewed_img):
     #cv2.imwrite(sys.argv[1].replace(".jpg","")+"_middle.jpg",deskwewd[upper_end:lower_start])
     print upper_start,upper_end,lower_start
     return [upper_start,upper_end,lower_start]
-def get_vertical_breaks(img):
+def get_vertical_breaks(img,ch_prop):
     vertical_histogram = (255*img.shape[0])-img.sum(axis=0)
 
     vertical_seg=[]
     vertical_break=[]
-    vertical_break.append(0)
+    stroke_width =ch_prop[1] - ch_prop[0]
     '''
     percentile=[]
 
@@ -145,7 +145,7 @@ def get_vertical_breaks(img):
     '''
     flag=False
     #for loc,data in enumerate(vertical_histogram < np.percentile(vertical_histogram,np.argmax(np.gradient(percentile))*2)):
-    for loc,data in enumerate(vertical_histogram > 0):
+    for loc,data in enumerate(vertical_histogram > 255*stroke_width*0.75):
             if(data):
                     if(not flag):
                         vertical_break.append(loc)
@@ -155,30 +155,76 @@ def get_vertical_breaks(img):
                         vertical_break.append(loc)
                         flag=False
     return vertical_break
+           
+def find_in_break(breaks,qry):
+    if(breaks is None):
+        return -1
+    for i in range(0,len(breaks),2):
+        if(breaks[i] == qry):
+            return i
+    return -1
 
 def write_feature_vector(character_properties,word_img,feat_file):
     upper = word_img[:character_properties[0]]
     middle = word_img[character_properties[1]:character_properties[2]]
     lower = word_img[character_properties[2]:]
 
-    upper_breaks = get_vertical_breaks(upper) if upper.shape[0] > word_img.shape[0]/6 else None
-    middle_breaks = get_vertical_breaks(middle) 
-    lower_breaks = get_vertical_breaks(lower) if lower.shape[0] > word_img.shape[0]/6 else None
+    upper_breaks = get_vertical_breaks(upper,character_properties) if upper.shape[0] > word_img.shape[0]/8 else None
+    middle_breaks = get_vertical_breaks(middle,character_properties) 
+    lower_breaks = get_vertical_breaks(lower,character_properties) if lower.shape[0] > word_img.shape[0]/8 else None
+
+    if(upper_breaks is not None and len(upper_breaks)%2 == 1):
+        upper_breaks.pop(-1)
+    if(middle_breaks is not None and len(middle_breaks)%2 == 1):
+        middle_breaks.pop(-1)
+    if(lower_breaks is not None and len(lower_breaks)%2 == 1):
+        lower_breaks.pop(-1)
 
     print upper.shape,middle.shape,lower.shape
     print upper_breaks,middle_breaks,lower_breaks;
      
-    for i in range(1,len(middle_breaks)-1,2):
-        character=middle[:,middle_breaks[i]:middle_breaks[i+1]]
-        resized = cv2.resize(character,(9,12),cv2.INTER_AREA)
+    for i in range(0,word_img.shape[1]):
+        index = find_in_break(middle_breaks,i)
+        if(index != -1):
+            print index
+            character=middle[:,middle_breaks[index]:middle_breaks[index+1]]
+            print character.shape
+            resized = cv2.resize(character,(12,16),cv2.INTER_AREA)
 
-        feat_file.write("character: "+str(i/2).zfill(2)+" "+str(resized.shape[0])+"x"+str(resized.shape[1])+"\n")
-        for col in resized:
-            for row in col:
-                feat_file.write("0" if row < 64 else " ")
-            feat_file.write("\n")
-        feat_file.write("\n\n")
-        
+            feat_file.write("character: middle "+str(middle_breaks[index])+"-"+str(middle_breaks[index+1])+"\n")
+            for col in resized:
+                for row in col:
+                    feat_file.write("0" if row < 64 else " ")
+                feat_file.write("\n")
+            feat_file.write("\n\n")
+        index = find_in_break(upper_breaks,i)
+        if(index != -1):
+            print index
+            character=upper[:,upper_breaks[index]:upper_breaks[index+1]]
+            print character.shape
+            resized = cv2.resize(character,(12,16),cv2.INTER_AREA)
+
+            feat_file.write("character: upper "+str(upper_breaks[index])+"-"+str(upper_breaks[index+1])+"\n")
+            for col in resized:
+                for row in col:
+                    feat_file.write("0" if row < 64 else " ")
+                feat_file.write("\n")
+            feat_file.write("\n\n")
+        index = find_in_break(lower_breaks,i)
+        if(index != -1):
+            print index
+            character=lower[:,lower_breaks[index]:lower_breaks[index+1]]
+            print character.shape
+            resized = cv2.resize(character,(12,16),cv2.INTER_AREA)
+
+            feat_file.write("character: lower "+str(lower_breaks[index])+"-"+str(lower_breaks[index+1])+"\n")
+            for col in resized:
+                for row in col:
+                    feat_file.write("0" if row < 128 else " ")
+                feat_file.write("\n")
+            feat_file.write("\n\n")
+ 
+       
     '''
     for loc,data in enumerate(vertical_histogram):
         if(data/255 < stroke_width):

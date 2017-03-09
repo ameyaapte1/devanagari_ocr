@@ -5,12 +5,14 @@ import sys
 def get_rect_rank(rect):
     x_mean=(rect[0]+rect[2])/2
     y_mean=(rect[1]+rect[3])/2
-    rank = (y/50)*5000+x
+    rank = (y_mean/50)*5000+x_mean
     return rank
-sys.argv.append("test.tif")
+sys.argv.append("binary.jpg")
 img = cv2.imread(sys.argv[1],cv2.IMREAD_GRAYSCALE)
+
 img[img>=128]=255
 img[img<128]=0
+
 contour_img= img.copy()
 word_img= img.copy()
 img = 255 - img
