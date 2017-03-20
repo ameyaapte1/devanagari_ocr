@@ -11,6 +11,32 @@ def get_rect_rank(rect):
 def get_word_image(img,rect):
     x,y,x_w,y_h=rect
     return img[y:y_h,x:x_w]
+def merge_nearby_rectangles(list_rect_coordinates):
+    size =len(list_rect_coordinates)
+    print size
+    is_overlap=list(range(0,size))
+    for i in range(0,size):
+        for j in range(-30 if i-30 < size else 0,30 if i+30 < size else size-i):
+            if(overlap(list_rect_coordinates[i],list_rect_coordinates[i+j],2)):
+                is_overlap[i+j]=is_overlap[i]
+                is_overlap[i]=is_overlap[i+j]
+    print is_overlap
+def overlap(r1,r2,bias):
+
+    r1_left   = min(r1[0], r1[2])
+    r1_right  = max(r1[0], r1[2])
+    r1_bottom = min(r1[1], r1[3]) - bias
+    r1_top    = max(r1[1], r1[3]) + bias
+    
+    r2_left   = min(r2[0], r2[2])
+    r2_right  = max(r2[0], r2[2])
+    r2_bottom = min(r2[1], r2[3]) - bias
+    r2_top    = max(r2[1], r2[3]) + bias
+
+    h_overlaps = (r1_left <= r2_right) and (r1_right >= r2_left)
+    v_overlaps = (r1_bottom <= r2_top) and (r1_top >= r2_bottom)
+    return h_overlaps and v_overlaps
+
 def get_characters_image(word_img,vertical_break):
     characters=[]
     for i in range(0,len(vertical_break)-1,2):
@@ -49,6 +75,7 @@ def get_word_coordinates(input_img,debug=False): #Returns list of coordinates as
             x,y,w,h = cv2.boundingRect(i)
             word_coord.append([x,y,x+w,y+h])
     word_coord.sort(key=lambda x:get_rect_rank(x))
+    merge_nearby_rectangles(word_coord)
     if(debug):
         for x,y,x_w,y_h in word_coord:
                 #cv2.imwrite('word_' + str(k).zfill(3) + '.jpg',out_binary_img[y:y+h,x:x+w])
@@ -184,45 +211,46 @@ def write_feature_vector(character_properties,word_img,feat_file):
     print upper_breaks,middle_breaks,lower_breaks;
      
     for i in range(0,word_img.shape[1]):
-        index = find_in_break(middle_breaks,i)
-        if(index != -1):
-            print index
-            character=middle[:,middle_breaks[index]:middle_breaks[index+1]]
+        middle_index = find_in_break(middle_breaks,i)
+        if(middle_index != -1):
+            print middle_index
+            character=middle[:,middle_breaks[middle_index]:middle_breaks[middle_index+1]]
             print character.shape
             resized = cv2.resize(character,(12,16),cv2.INTER_AREA)
 
-            feat_file.write("character: middle "+str(middle_breaks[index])+"-"+str(middle_breaks[index+1])+"\n")
+            feat_file.write("character: middle "+str(middle_breaks[middle_index])+"-"+str(middle_breaks[middle_index+1])+"\n")
             for col in resized:
                 for row in col:
                     feat_file.write("0" if row < 64 else " ")
                 feat_file.write("\n")
             feat_file.write("\n\n")
-        index = find_in_break(upper_breaks,i)
-        if(index != -1):
-            print index
-            character=upper[:,upper_breaks[index]:upper_breaks[index+1]]
+        upper_index = find_in_break(upper_breaks,i)
+        if(upper_index != -1):
+            print upper_index
+            character=upper[:,upper_breaks[upper_index]:upper_breaks[upper_index+1]]
             print character.shape
             resized = cv2.resize(character,(12,16),cv2.INTER_AREA)
 
-            feat_file.write("character: upper "+str(upper_breaks[index])+"-"+str(upper_breaks[index+1])+"\n")
+            feat_file.write("character: upper "+str(upper_breaks[upper_index])+"-"+str(upper_breaks[upper_index+1])+"\n")
             for col in resized:
                 for row in col:
                     feat_file.write("0" if row < 64 else " ")
                 feat_file.write("\n")
             feat_file.write("\n\n")
-        index = find_in_break(lower_breaks,i)
-        if(index != -1):
-            print index
-            character=lower[:,lower_breaks[index]:lower_breaks[index+1]]
-            print character.shape
-            resized = cv2.resize(character,(12,16),cv2.INTER_AREA)
+        lower_index = find_in_break(lower_breaks,i)
+        if(lower_index != -1):
+            if(lower_breaks[lower_index] != middle_breaks[middle_index] or lower_breaks[lower_index + 1] != middle_breaks[middle_index +1]):
+                print lower_index
+                character=lower[:,lower_breaks[lower_index]:lower_breaks[lower_index+1]]
+                print character.shape
+                resized = cv2.resize(character,(12,16),cv2.INTER_AREA)
 
-            feat_file.write("character: lower "+str(lower_breaks[index])+"-"+str(lower_breaks[index+1])+"\n")
-            for col in resized:
-                for row in col:
-                    feat_file.write("0" if row < 128 else " ")
-                feat_file.write("\n")
-            feat_file.write("\n\n")
+                feat_file.write("character: lower "+str(lower_breaks[lower_index])+"-"+str(lower_breaks[lower_index+1])+"\n")
+                for col in resized:
+                    for row in col:
+                        feat_file.write("0" if row < 128 else " ")
+                    feat_file.write("\n")
+                feat_file.write("\n\n")
  
        
     '''
