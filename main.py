@@ -8,19 +8,28 @@ def get_rect_rank(rect):
     y_mean=(rect[1]+rect[3])/2
     rank = (y_mean/100)*100000+x_mean
     return rank
+
+def get_rect_area(rect):
+    return abs(rect[0]-rect[2])*abs(rect[1]-rect[3])
+
 def get_word_image(img,rect):
     x,y,x_w,y_h=rect
     return img[y:y_h,x:x_w]
+
 def merge_nearby_rectangles(list_rect_coordinates):
     size =len(list_rect_coordinates)
     print size
     is_overlap=list(range(0,size))
     for i in range(0,size):
         for j in range(-30 if i-30 < size else 0,30 if i+30 < size else size-i):
+            area_1 = get_rect_area(list_rect_coordinates[i])
+            area_2 = get_rect_area(list_rect_coordinates[i+j])
+            area_ratio = float(area_1)/area_2 if area_1 > area_2 else float(area_2)/area_1 
             if(overlap(list_rect_coordinates[i],list_rect_coordinates[i+j],2)):
                 is_overlap[i+j]=is_overlap[i]
                 is_overlap[i]=is_overlap[i+j]
     print is_overlap
+
 def overlap(r1,r2,bias):
 
     r1_left   = min(r1[0], r1[2])
@@ -42,9 +51,11 @@ def get_characters_image(word_img,vertical_break):
     for i in range(0,len(vertical_break)-1,2):
         characters.append(word_img[:,vertical_break[i]:vertical_break[i+1]])
     return characters
+
 def write_word(img,word_coordinates,file_name):
     x,y,x_w,y_h=word_coordinates
     cv2.imwrite(file_name,img[y:y_h,x:x_w])
+
 def get_word_coordinates(input_img,debug=False): #Returns list of coordinates as a list. It contains [x,y,x+w,y+h]
     binary_img=input_img.copy()         #Original image is not modified
 

@@ -1,6 +1,7 @@
 import cv2
 import string
 import sys
+import codecs
 from main import *
 sys.argv.append('../test.tif')
 sys.argv.append('../test.box')
@@ -11,7 +12,7 @@ word_file = open(sys.argv[2],"r")
 rawdata = word_file.read()
 word=[]
 contour_img = img.copy()
-feat_file=open("feat.dat","w")
+feat_file=codecs.open("feat.dat","w","utf8")
 for i in rawdata.split("\n"):
     if(len(i) > 1):
         temp = i.split(' ')
@@ -24,6 +25,6 @@ for loc,data in enumerate(word):
     contour_img = cv2.rectangle(contour_img,(w[0],w[1]),(w[2],w[3]),(0,0,0),2)
     word_img = get_word_image(img,w)
     ch_prop=get_character_properties(word_img)
-    feat_file.write(" word-"+str(loc).zfill(3)+"\n")
+    feat_file.write(" word-"+str(loc).zfill(3)+" "+data[0]+"\n")
     write_feature_vector(ch_prop,get_word_image(img,w),feat_file)
 cv2.imwrite("contour.jpg",contour_img)
