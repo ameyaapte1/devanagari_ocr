@@ -6,7 +6,7 @@ import os
 def get_rect_rank(rect):
     x_mean=(rect[0]+rect[2])/2
     y_mean=(rect[1]+rect[3])/2
-    rank = (y_mean/100)*100000+x_mean
+    rank = (y_mean/150)*100000+x_mean
     return rank
 
 def get_rect_area(rect):
@@ -18,32 +18,61 @@ def get_word_image(img,rect):
 
 def merge_nearby_rectangles(list_rect_coordinates):
     size =len(list_rect_coordinates)
+    res=[]
     print size
-    is_overlap=list(range(0,size))
+    is_overlap=np.array(list(range(0,size)))
     for i in range(0,size):
-        for j in range(-30 if i-30 < size else 0,30 if i+30 < size else size-i):
+        for j in range(i,size):
             area_1 = get_rect_area(list_rect_coordinates[i])
-            area_2 = get_rect_area(list_rect_coordinates[i+j])
+            area_2 = get_rect_area(list_rect_coordinates[j])
             area_ratio = float(area_1)/area_2 if area_1 > area_2 else float(area_2)/area_1 
-            if(overlap(list_rect_coordinates[i],list_rect_coordinates[i+j],2)):
-                is_overlap[i+j]=is_overlap[i]
-                is_overlap[i]=is_overlap[i+j]
+            if(area_ratio > 4  and overlap(list_rect_coordinates[i],list_rect_coordinates[j],2)):
+                is_overlap[j]=is_overlap[i]
+                is_overlap[i]=is_overlap[j]
+    flag = False
+    for i in range(len(is_overlap)):
+        rect = list_rect_coordinates[i]
+        for j in np.where(is_overlap==i)[0]:
+            rect=union(rect,list_rect_coordinates[j])
+            flag=True
+        if(flag):
+            res.append(rect)
+            flag=False
     print is_overlap
+    print res
+    return res
+def union(r1,r2):
+    r1_left   = r1[0]
+    r1_right  = r1[2]
+    r1_bottom = r1[3]
+    r1_top    = r1[1]
+    
+    r2_left   = r2[0]
+    r2_right  = r2[2]
+    r2_bottom = r2[3]
+    r2_top    = r2[1]
 
+
+    x = min(r1_left,r2_left)
+    y = min(r1_top,r2_top)
+    x_w = max(r1_right,r2_right)
+    y_h = max(r1_bottom,r2_bottom)
+
+    return [x,y,x_w,y_h]
 def overlap(r1,r2,bias):
 
-    r1_left   = min(r1[0], r1[2])
-    r1_right  = max(r1[0], r1[2])
-    r1_bottom = min(r1[1], r1[3]) - bias
-    r1_top    = max(r1[1], r1[3]) + bias
+    r1_left   = r1[0]
+    r1_right  = r1[2]
+    r1_bottom = r1[3] + bias
+    r1_top    = r1[1] - bias
     
-    r2_left   = min(r2[0], r2[2])
-    r2_right  = max(r2[0], r2[2])
-    r2_bottom = min(r2[1], r2[3]) - bias
-    r2_top    = max(r2[1], r2[3]) + bias
+    r2_left   = r2[0]
+    r2_right  = r2[2]
+    r2_bottom = r2[3] + bias
+    r2_top    = r2[1] - bias
 
     h_overlaps = (r1_left <= r2_right) and (r1_right >= r2_left)
-    v_overlaps = (r1_bottom <= r2_top) and (r1_top >= r2_bottom)
+    v_overlaps = (r1_bottom >= r2_top) and (r1_top <= r2_bottom)
     return h_overlaps and v_overlaps
 
 def get_characters_image(word_img,vertical_break):
@@ -86,13 +115,13 @@ def get_word_coordinates(input_img,debug=False): #Returns list of coordinates as
             x,y,w,h = cv2.boundingRect(i)
             word_coord.append([x,y,x+w,y+h])
     word_coord.sort(key=lambda x:get_rect_rank(x))
-    merge_nearby_rectangles(word_coord)
+    word_coord=merge_nearby_rectangles(word_coord)
     if(debug):
         for x,y,x_w,y_h in word_coord:
                 #cv2.imwrite('word_' + str(k).zfill(3) + '.jpg',out_binary_img[y:y+h,x:x+w])
                 debug_binary_img = cv2.rectangle(debug_binary_img,(x,y),(x_w,y_h),(0,0,0),2)
-                cnt += 1
                 cv2.putText(debug_binary_img,str(cnt),(x,y),cv2.FONT_HERSHEY_SIMPLEX, 1, 2)
+                cnt += 1
         cv2.imwrite("contours.jpg",debug_binary_img)
     return word_coord
 
@@ -159,9 +188,14 @@ def get_character_properties(deskewed_img):
             #print upper_end
             find_upper = False
         #and horizontal_histogram[loc]>=horizontal_histogram[loc+1] and horizontal_histogram[loc+1] <= horizontal_histogram[loc+2]
-        if(i/255 < deskewed_img.shape[1]/6 and loc > deskewed_img.shape[0]*2/3 and lower_start==-1 and not find_upper ):
+        if(i/255 < deskewed_img.shape[1]/6 and loc > deskewed_img.shape[0]*2.0/3 and lower_start==-1 and not find_upper ):
             lower_start=loc
             break
+    '''
+    for loc,i in enumerate(reversed(horizontal_histogram)):
+        if( i/255 > deskewed_img.shape[1]/1.5 and  loc > deskewed_img.shape[0]*1.0/3 and horizontal_histogram[loc]>=horizontal_histogram[loc+1] and horizontal_histogram[loc+1] <= horizontal_histogram[loc+2]):
+            lower_start=loc
+    '''
 
     #lower_start=horizontal_histogram[upper_end:].argmin()
     #cv2.imwrite(sys.argv[1].replace(".jpg","")+"_"+str(k)+"_upper.jpg",deskewed_img[:upper_start])
@@ -183,7 +217,7 @@ def get_vertical_breaks(img,ch_prop):
     '''
     flag=False
     #for loc,data in enumerate(vertical_histogram < np.percentile(vertical_histogram,np.argmax(np.gradient(percentile))*2)):
-    for loc,data in enumerate(vertical_histogram > 255*stroke_width*0.75):
+    for loc,data in enumerate(vertical_histogram > 255*stroke_width*0.5):
             if(data):
                     if(not flag):
                         vertical_break.append(loc)
@@ -250,18 +284,17 @@ def write_feature_vector(character_properties,word_img,feat_file):
             feat_file.write("\n\n")
         lower_index = find_in_break(lower_breaks,i)
         if(lower_index != -1):
-            if(lower_breaks[lower_index] != middle_breaks[middle_index] or lower_breaks[lower_index + 1] != middle_breaks[middle_index +1]):
-                print lower_index
-                character=lower[:,lower_breaks[lower_index]:lower_breaks[lower_index+1]]
-                print character.shape
-                resized = cv2.resize(character,(12,16),cv2.INTER_AREA)
+            print lower_index
+            character=lower[:,lower_breaks[lower_index]:lower_breaks[lower_index+1]]
+            print character.shape
+            resized = cv2.resize(character,(12,16),cv2.INTER_AREA)
 
-                feat_file.write("character: lower "+str(lower_breaks[lower_index])+"-"+str(lower_breaks[lower_index+1])+"\n")
-                for col in resized:
-                    for row in col:
-                        feat_file.write("0" if row < 128 else " ")
-                    feat_file.write("\n")
-                feat_file.write("\n\n")
+            feat_file.write("character: lower "+str(lower_breaks[lower_index])+"-"+str(lower_breaks[lower_index+1])+"\n")
+            for col in resized:
+                for row in col:
+                    feat_file.write("0" if row < 128 else " ")
+                feat_file.write("\n")
+            feat_file.write("\n\n")
  
        
     '''

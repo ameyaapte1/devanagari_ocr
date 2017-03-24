@@ -25,6 +25,6 @@ for loc,data in enumerate(word):
     contour_img = cv2.rectangle(contour_img,(w[0],w[1]),(w[2],w[3]),(0,0,0),2)
     word_img = get_word_image(img,w)
     ch_prop=get_character_properties(word_img)
-    feat_file.write(" word-"+str(loc).zfill(3)+" "+data[0]+"\n")
+    feat_file.write(" word-"+str(loc).zfill(3)+" "+data[0]+" upper_start:"+str(ch_prop[0])+"upper_end:"+str(ch_prop[1])+"lower:"+str(ch_prop[2])+"\n")
     write_feature_vector(ch_prop,get_word_image(img,w),feat_file)
 cv2.imwrite("contour.jpg",contour_img)
