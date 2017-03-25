@@ -3,8 +3,8 @@ import string
 import sys
 import codecs
 from main import *
-sys.argv.append('../test.tif')
-sys.argv.append('../test.box')
+sys.argv.append('./test.tif')
+sys.argv.append('./test.box')
 img = cv2.imread(sys.argv[1],cv2.IMREAD_GRAYSCALE)
 height=img.shape[0]
 width=img.shape[1]
