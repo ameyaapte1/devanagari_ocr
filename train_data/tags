@@ -1,0 +1,45 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ch_prop	extract_feat.py	/^        ch_prop=get_character_properties(word_img)$/;"	v
+command	prepare_data.py	/^    command = ['text2image', '--box_padding','3','--output_word_boxes', '--xsize', '750', '--ysize', '1000',$/;"	v
+contour_img	extract_feat.py	/^        contour_img = cv2.rectangle(contour_img,(w[0],w[1]),(w[2],w[3]),(0,0,0),2)$/;"	v
+contour_img	extract_feat.py	/^    contour_img = img.copy()$/;"	v
+count	extract_feat.py	/^count = 0$/;"	v
+diff	extract_feat.py	/^        diff = abs(data[3]-data[1])$/;"	v
+errors	extract_feat.py	/^errors = []$/;"	v
+extension	extract_feat.py	/^    extension = filee[filee.rfind('.'):]$/;"	v
+fail	prepare_data.py	/^fail = 0$/;"	v
+feat_file	extract_feat.py	/^    feat_file=codecs.open(without_extension + "_feat.dat","w","utf8")$/;"	v
+filee	extract_feat.py	/^    filee = 'images\/'+filee$/;"	v
+files	prepare_data.py	/^files = os.listdir('FONTS')$/;"	v
+find_in_break	main.py	/^def find_in_break(breaks,qry):$/;"	f
+font	prepare_data.py	/^    font = font_name.replace('-',' ')$/;"	v
+font_name	prepare_data.py	/^    font_name = fil[:fil.rfind('.')]$/;"	v
+get_character_properties	main.py	/^def get_character_properties(deskewed_img):$/;"	f
+get_characters_image	main.py	/^def get_characters_image(word_img,vertical_break):$/;"	f
+get_deskewed_word	main.py	/^def get_deskewed_word(input_word_img):    #Returns the deskewed word as a numpy array$/;"	f
+get_rect_area	main.py	/^def get_rect_area(rect):$/;"	f
+get_rect_rank	main.py	/^def get_rect_rank(rect):$/;"	f
+get_vertical_breaks	main.py	/^def get_vertical_breaks(img,ch_prop):$/;"	f
+get_word_coordinates	main.py	/^def get_word_coordinates(input_img,debug=False): #Returns list of coordinates as a list. It contains [x,y,x+w,y+h]$/;"	f
+get_word_image	main.py	/^def get_word_image(img,rect):$/;"	f
+height	extract_feat.py	/^    height=img.shape[0]$/;"	v
+images	extract_feat.py	/^images = os.listdir('images\/')$/;"	v
+img	extract_feat.py	/^    img = cv2.imread(filee,cv2.IMREAD_GRAYSCALE)$/;"	v
+merge_nearby_rectangles	main.py	/^def merge_nearby_rectangles(list_rect_coordinates):$/;"	f
+overlap	main.py	/^def overlap(r1,r2,bias):$/;"	f
+rawdata	extract_feat.py	/^    rawdata = word_file.read()$/;"	v
+sucess	prepare_data.py	/^sucess = 0$/;"	v
+temp	extract_feat.py	/^            temp = i.split(' ')$/;"	v
+w	extract_feat.py	/^        w=[data[3]-diff,data[4],data[1]+diff,data[2]]$/;"	v
+width	extract_feat.py	/^    width=img.shape[1]$/;"	v
+without_extension	extract_feat.py	/^    without_extension = filee[:filee.rfind('.')]$/;"	v
+word	extract_feat.py	/^    word=[]$/;"	v
+word_file	extract_feat.py	/^    word_file = open(without_extension+ '.box',"r")$/;"	v
+word_img	extract_feat.py	/^        word_img = get_word_image(img,w)$/;"	v
+write_feature_vector	main.py	/^def write_feature_vector(character_properties,word_img,feat_file):$/;"	f
+write_word	main.py	/^def write_word(img,word_coordinates,file_name):$/;"	f

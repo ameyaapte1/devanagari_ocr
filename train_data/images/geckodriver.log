@@ -1,0 +1,31 @@
+1490361195031	geckodriver	INFO	Listening on 127.0.0.1:42146
+1490361196223	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.wglJbxelNz8q
+1490361196224	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args []
+1490361196226	geckodriver::marionette	INFO	Connecting to Marionette on localhost:34025
+1490361197546	Marionette	INFO	Listening on port 34025
+1490361199070	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: chrome://marionette/content/listener.js, line 1060: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+1490361395499	geckodriver	INFO	Listening on 127.0.0.1:41579
+1490361396573	mozprofile::profile	INFO	Using profile path /tmp/rust_mozprofile.oMZtFP50Dqpv
+1490361396574	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args []
+1490361396577	geckodriver::marionette	INFO	Connecting to Marionette on localhost:37763
+1490361398078	Marionette	INFO	Listening on port 37763
+1490361399833	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://www.facebook.com/rsrc.php/v3iIsC4/yl/l/en_GB/5fiudoTQQRY.js, line 51: unreachable code after return statement
+JavaScript warning: https://www.facebook.com/rsrc.php/v3iIsC4/yl/l/en_GB/5fiudoTQQRY.js, line 51: unreachable code after return statement
+JavaScript warning: https://www.facebook.com/rsrc.php/v3iIsC4/yl/l/en_GB/5fiudoTQQRY.js, line 51: unreachable code after return statement
+JavaScript warning: https://www.facebook.com/rsrc.php/v3iIsC4/yl/l/en_GB/5fiudoTQQRY.js, line 51: unreachable code after return statement
+JavaScript warning: https://www.facebook.com/rsrc.php/v3iIsC4/yl/l/en_GB/5fiudoTQQRY.js, line 51: unreachable code after return statement
+JavaScript warning: https://www.facebook.com/rsrc.php/v3iIsC4/yl/l/en_GB/5fiudoTQQRY.js, line 51: unreachable code after return statement
+JavaScript warning: https://www.facebook.com/rsrc.php/v3iIsC4/yl/l/en_GB/5fiudoTQQRY.js, line 51: unreachable code after return statement
+JavaScript warning: https://www.facebook.com/rsrc.php/v3iIsC4/yl/l/en_GB/5fiudoTQQRY.js, line 51: unreachable code after return statement
+JavaScript warning: https://www.facebook.com/rsrc.php/v3iIsC4/yl/l/en_GB/5fiudoTQQRY.js, line 51: unreachable code after return statement
+JavaScript warning: https://www.facebook.com/rsrc.php/v3iIsC4/yl/l/en_GB/5fiudoTQQRY.js, line 51: unreachable code after return statement
+JavaScript warning: https://www.facebook.com/rsrc.php/v3iIsC4/yl/l/en_GB/5fiudoTQQRY.js, line 51: unreachable code after return statement
+JavaScript warning: https://www.facebook.com/rsrc.php/v3iIsC4/yl/l/en_GB/5fiudoTQQRY.js, line 51: unreachable code after return statement
+*************************
+A coding exception was thrown and uncaught in a Task.
+
+Full message: TypeError: NetworkError when attempting to fetch resource.
+Full stack: 
+*************************

@@ -1,0 +1,175 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+above_character_height	find_words_and_deskew.py	/^above_character_height=[]$/;"	v
+angle	deskew.py	/^            angle = np.arctan((y2-y1)\/float(x2-x1)) * 180.0\/np.pi$/;"	v
+angle	find_words_and_deskew.py	/^                angle = np.arctan((y2-y1)\/float(x2-x1)) * 180.0\/np.pi$/;"	v
+below_character_height	find_words_and_deskew.py	/^below_character_height=[]$/;"	v
+bin_img	binarization.py	/^bin_img = img.copy()$/;"	v
+blur	binarization.py	/^            blur = cv2.GaussianBlur(img[prev_i:i,prev_j:j],(5,5),0)$/;"	v
+blur	deskew.py	/^blur = cv2.GaussianBlur(rotated,(5,5),0)$/;"	v
+blur	find_lines_words.py	/^blur = cv2.GaussianBlur(img,(5,5),0)$/;"	v
+blur	find_words_and_deskew.py	/^        blur = cv2.GaussianBlur(rotated,(5,5),0)$/;"	v
+ch_prop	using_main.py	/^        ch_prop=get_character_properties(deskewed)$/;"	v
+character	find_words_and_deskew.py	/^        character=deskewed[:,vertical_break[i]:vertical_break[i+1]]$/;"	v
+character_height	find_words_and_deskew.py	/^character_height=[]$/;"	v
+character_width	find_words_and_deskew.py	/^character_width=[]$/;"	v
+cnt	find_words_and_deskew.py	/^cnt=0$/;"	v
+confiedence	deskew.py	/^confiedence = 100$/;"	v
+confiedence	find_words_and_deskew.py	/^    confiedence = 100$/;"	v
+contour_img	contours.py	/^        contour_img = cv2.rectangle(contour_img,(x,y),(x_w,y_h),(0,0,0),2)$/;"	v
+contour_img	contours.py	/^contour_img= img.copy()$/;"	v
+contour_img	find_words_and_deskew.py	/^        contour_img = cv2.rectangle(contour_img,(x,y),(x_w,y_h),(0,0,0),2)$/;"	v
+contour_img	find_words_and_deskew.py	/^contour_img= img.copy()$/;"	v
+contour_rects	contours.py	/^contour_rects = []$/;"	v
+contour_rects	find_words_and_deskew.py	/^contour_rects = []$/;"	v
+correct	svm.py	/^correct = np.count_nonzero(mask)$/;"	v
+deskewed	using_main.py	/^    deskewed = get_deskewed_word(get_word_image(img,data))$/;"	v
+dilation	erosion.py	/^dilation = cv2.erode(img,kernel,iterations = 1)$/;"	v
+dist	deskew.py	/^            dist = np.sqrt(abs((x2-x1)^2-(y2-y1)^2))$/;"	v
+dist	find_words_and_deskew.py	/^                dist = np.sqrt(abs((x2-x1)^2-(y2-y1)^2))$/;"	v
+edges	cannyedge.py	/^edges = cv2.Canny(img,100,200)$/;"	v
+edges	test.py	/^edges = cv2.Canny(img,100,200)$/;"	v
+end	find_lines_words.py	/^            end = index;$/;"	v
+end	find_lines_words.py	/^        end = index;$/;"	v
+end	find_lines_words.py	/^end = 0$/;"	v
+equ	histogram_equ.py	/^equ = cv2.equalizeHist(img)$/;"	v
+feat_file	find_words_and_deskew.py	/^feat_file = open("character.feat",'w')$/;"	v
+feat_file	using_main.py	/^feat_file=open("feat.dat","w")$/;"	v
+filename	svm.py	/^filename='' #Set the filename$/;"	v
+find_upper	char_split.py	/^        find_upper = False$/;"	v
+find_upper	char_split.py	/^find_upper=True$/;"	v
+find_upper	find_words_and_deskew.py	/^            find_upper = False$/;"	v
+find_upper	find_words_and_deskew.py	/^    find_upper=True$/;"	v
+flag	char_split.py	/^			flag=data$/;"	v
+flag	char_split.py	/^flag=False$/;"	v
+flag	find_lines_words.py	/^            flag = False$/;"	v
+flag	find_lines_words.py	/^            flag = True$/;"	v
+flag	find_lines_words.py	/^        flag = False$/;"	v
+flag	find_lines_words.py	/^        flag = True$/;"	v
+flag	find_lines_words.py	/^flag = False$/;"	v
+flag	find_words_and_deskew.py	/^                        flag=False$/;"	v
+flag	find_words_and_deskew.py	/^                        flag=True$/;"	v
+flag	find_words_and_deskew.py	/^    flag=False$/;"	v
+get_character_properties	main.py	/^def get_character_properties(deskewed_img):$/;"	f
+get_characters_image	main.py	/^def get_characters_image(word_img,vertical_break):$/;"	f
+get_deskewed_word	main.py	/^def get_deskewed_word(input_word_img):    #Returns the deskewed word as a numpy array$/;"	f
+get_rect_rank	contours.py	/^def get_rect_rank(rect):$/;"	f
+get_rect_rank	find_words_and_deskew.py	/^def get_rect_rank(rect):$/;"	f
+get_rect_rank	main.py	/^def get_rect_rank(rect):$/;"	f
+get_vertical_breaks	main.py	/^def get_vertical_breaks(img):$/;"	f
+get_word_coordinates	main.py	/^def get_word_coordinates(input_img,debug=False): #Returns list of coordinates as a list. It contains [x,y,x+w,y+h]$/;"	f
+get_word_image	main.py	/^def get_word_image(img,rect):$/;"	f
+height	training.py	/^height=img.shape[0]$/;"	v
+horizontal_histogram	char_split.py	/^horizontal_histogram = (255*img.shape[1])-img.sum(axis=1)$/;"	v
+horizontal_histogram	find_words_and_deskew.py	/^    horizontal_histogram = (255*deskewed.shape[1])-deskewed.sum(axis=1)$/;"	v
+horizontal_histogram	plot.py	/^horizontal_histogram = (255*img.shape[1])-img.sum(axis=1)$/;"	v
+horizontal_sum	find_lines_words.py	/^horizontal_sum = bin_img.sum(axis = 1)$/;"	v
+hough_lines	deskew.py	/^hough_lines = np.zeros(img.shape)$/;"	v
+i	binarization.py	/^        i = img.shape[0]$/;"	v
+i	binarization.py	/^    i = i + img.shape[0]\/step$/;"	v
+i	binarization.py	/^i=0$/;"	v
+img	binarization.py	/^img = cv2.imread(sys.argv[1],0)$/;"	v
+img	cannyedge.py	/^img = cv2.imread('binary.jpg',0)$/;"	v
+img	char_split.py	/^img = cv2.imread(sys.argv[1],0)$/;"	v
+img	char_split.py	/^img = img[upper_end:lower_start]$/;"	v
+img	contours.py	/^img = 255 - img$/;"	v
+img	contours.py	/^img = cv2.imread(sys.argv[1],cv2.IMREAD_GRAYSCALE)$/;"	v
+img	deskew.py	/^img = 255 - img$/;"	v
+img	deskew.py	/^img = cv2.imread(sys.argv[1],0)$/;"	v
+img	erosion.py	/^img = cv2.imread('binary.jpg',cv2.IMREAD_GRAYSCALE)$/;"	v
+img	find_lines_words.py	/^img = cv2.imread('.\/orig_image.jpg',0)$/;"	v
+img	find_words_and_deskew.py	/^img = 255 - img$/;"	v
+img	find_words_and_deskew.py	/^img = cv2.imread(sys.argv[1],cv2.IMREAD_GRAYSCALE)$/;"	v
+img	histogram_equ.py	/^img = cv2.imread('.\/orig_image.jpg',0)$/;"	v
+img	local_binarization.py	/^img = cv2.imread(".\/img_05.jpg",0)$/;"	v
+img	plot.py	/^img = cv2.imread(sys.argv[1],0)$/;"	v
+img	svm.py	/^img = cv2.imread(filename,0)$/;"	v
+img	test.py	/^img = cv2.imread('binary.jpg',0)$/;"	v
+img	training.py	/^    img = cv2.rectangle(img,(i[1],i[2]),(i[3],i[4]),(0,0,0),2)$/;"	v
+img	training.py	/^img = cv2.imread('test.tif')$/;"	v
+img	using_main.py	/^img = cv2.imread("binary.jpg",cv2.IMREAD_GRAYSCALE)$/;"	v
+img_area	find_words_and_deskew.py	/^img_area=img.shape[0]*img.shape[1]$/;"	v
+j	binarization.py	/^            j = img.shape[1]$/;"	v
+j	binarization.py	/^        j = j + img.shape[1]\/step$/;"	v
+j	binarization.py	/^j=0$/;"	v
+k	contours.py	/^k=0$/;"	v
+k	find_lines_words.py	/^k = 0$/;"	v
+k	find_words_and_deskew.py	/^k=0$/;"	v
+kernel	erosion.py	/^kernel = np.ones((3,3),np.uint8)$/;"	v
+lines	deskew.py	/^    lines = cv2.HoughLinesP(img,2,np.pi\/180,confiedence,minLineLength,maxLineGap)$/;"	v
+lines	deskew.py	/^lines = None$/;"	v
+lines	find_lines_words.py	/^lines=list()$/;"	v
+lines	find_words_and_deskew.py	/^        lines = cv2.HoughLinesP(word,2,np.pi\/180,confiedence,minLineLength,maxLineGap)$/;"	v
+lines	find_words_and_deskew.py	/^    lines = None$/;"	v
+longest_line	deskew.py	/^longest_line=[0,0]$/;"	v
+longest_line	find_words_and_deskew.py	/^    longest_line=[0,0]$/;"	v
+lower	find_words_and_deskew.py	/^    lower = deskewed[lower_start:]$/;"	v
+lower_start	char_split.py	/^        lower_start=loc$/;"	v
+lower_start	char_split.py	/^lower_start=-1$/;"	v
+lower_start	find_words_and_deskew.py	/^            lower_start=loc+1$/;"	v
+lower_start	find_words_and_deskew.py	/^    lower_start=-1$/;"	v
+maxLineGap	deskew.py	/^maxLineGap = 1$/;"	v
+maxLineGap	find_words_and_deskew.py	/^    maxLineGap = 20$/;"	v
+middle	find_words_and_deskew.py	/^    middle = deskewed[upper_end:lower_start]$/;"	v
+minLineLength	deskew.py	/^minLineLength = img.shape[1]$/;"	v
+minLineLength	find_words_and_deskew.py	/^    minLineLength = word.shape[1]$/;"	v
+out_img	find_words_and_deskew.py	/^out_img =img.copy()$/;"	v
+output	find_words_and_deskew.py	/^        output=np.concatenate((output,character,spacer_array),axis=1)$/;"	v
+output	find_words_and_deskew.py	/^    output = np.zeros((deskewed.shape[0],1))$/;"	v
+percentile	char_split.py	/^percentile=[]$/;"	v
+prev_i	binarization.py	/^    prev_i=i$/;"	v
+prev_i	binarization.py	/^prev_i = 0$/;"	v
+prev_j	binarization.py	/^        prev_j=j$/;"	v
+prev_j	binarization.py	/^prev_j = 0$/;"	v
+rawdata	training.py	/^rawdata = word_file.read()$/;"	v
+res	histogram_equ.py	/^res = np.hstack((img,equ)) #stacking images side-by-side$/;"	v
+resized	find_words_and_deskew.py	/^        resized = cv2.resize(character,(9,12),cv2.INTER_AREA)$/;"	v
+responses	svm.py	/^responses = np.float32() # m X 1 Output vector(Actual Output)$/;"	v
+result	svm.py	/^result = svm.predict_all(testData)$/;"	v
+rot	deskew.py	/^rot = cv2.getRotationMatrix2D((cols\/2,rows\/2),longest_line[1],1)$/;"	v
+rot	find_words_and_deskew.py	/^        rot = cv2.getRotationMatrix2D((cols\/2,rows\/2),longest_line[1],1)$/;"	v
+rotated	deskew.py	/^rotated = 255 - cv2.warpAffine(img,rot,(cols,rows),cv2.INTER_CUBIC)$/;"	v
+rotated	find_words_and_deskew.py	/^        rotated = 255 - cv2.warpAffine(word,rot,(cols,rows),cv2.INTER_CUBIC)$/;"	v
+spacer_array	find_words_and_deskew.py	/^    spacer_array=np.zeros((deskewed.shape[0],2))$/;"	v
+start	find_lines_words.py	/^            start = index;$/;"	v
+start	find_lines_words.py	/^        start = index;$/;"	v
+start	find_lines_words.py	/^start = 0$/;"	v
+step	binarization.py	/^step=int(sys.argv[2])$/;"	v
+stroke_thickness	find_words_and_deskew.py	/^stroke_thickness=[]$/;"	v
+stroke_width	char_split.py	/^stroke_width = upper_end-upper_start$/;"	v
+stroke_width	find_words_and_deskew.py	/^    stroke_width=upper_end-upper_start$/;"	v
+svm	svm.py	/^svm = cv2.SVM()$/;"	v
+svm_params	svm.py	/^svm_params = dict( kernel_type = cv2.SVM_RBF,$/;"	v
+svm_type	svm.py	/^                            svm_type = cv2.SVM_C_SVC,$/;"	v
+temp	training.py	/^        temp = i.split(' ')$/;"	v
+testData	svm.py	/^testData = np.float32() # Feature vector extracted from test images$/;"	v
+trainData	svm.py	/^trainData = np.float32() # n X 1 Feature Vector$/;"	v
+upper	find_words_and_deskew.py	/^    upper = deskewed[:upper_end]$/;"	v
+upper_end	char_split.py	/^        upper_end = loc+1$/;"	v
+upper_end	find_words_and_deskew.py	/^            upper_end = loc+1$/;"	v
+upper_start	char_split.py	/^        upper_start=loc+1$/;"	v
+upper_start	char_split.py	/^upper_start=-1$/;"	v
+upper_start	find_words_and_deskew.py	/^            upper_start=loc+1$/;"	v
+upper_start	find_words_and_deskew.py	/^    upper_start=-1$/;"	v
+vertical_break	char_split.py	/^vertical_break=[]$/;"	v
+vertical_break	find_words_and_deskew.py	/^    vertical_break=[]$/;"	v
+vertical_histogram	char_split.py	/^vertical_histogram = (255*img.shape[0])-img.sum(axis=0)$/;"	v
+vertical_histogram	find_words_and_deskew.py	/^    vertical_histogram = (255*middle.shape[0])-middle.sum(axis=0)$/;"	v
+vertical_histogram	plot.py	/^vertical_histogram = (255*img.shape[0])-img.sum(axis=0)$/;"	v
+vertical_seg	find_words_and_deskew.py	/^    vertical_seg=[]$/;"	v
+vertical_sum	find_lines_words.py	/^    vertical_sum = bin_img[i[0]:i[1]].sum(axis = 0)$/;"	v
+width	training.py	/^width=img.shape[1]$/;"	v
+word	find_words_and_deskew.py	/^    word = 255 - word$/;"	v
+word	find_words_and_deskew.py	/^    word = out_img[y:y_h,x:x_w].copy()$/;"	v
+word	training.py	/^word=[]$/;"	v
+word_file	training.py	/^word_file = open('test.box',"r")$/;"	v
+word_img	contours.py	/^word_img= img.copy()$/;"	v
+word_plot	find_lines_words.py	/^def word_plot(orientation , word_list):$/;"	f
+words	find_lines_words.py	/^words=list()$/;"	v
+words	using_main.py	/^words=get_word_coordinates(img)$/;"	v
+write_feature_vector	main.py	/^def write_feature_vector(character_properties,word_img,feat_file):$/;"	f
+write_word	main.py	/^def write_word(img,word_coordinates,file_name):$/;"	f

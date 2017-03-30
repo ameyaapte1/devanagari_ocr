@@ -1,6 +1,9 @@
 import cv2
 import numpy as np
-
+def char_id_y(file_obj):
+    pass
+def get_flattened_image(file_obj, resolution):
+    pass
 
 svm_params = dict( kernel_type = cv2.SVM_RBF,
                             svm_type = cv2.SVM_C_SVC,
