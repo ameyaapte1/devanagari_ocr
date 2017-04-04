@@ -8,6 +8,10 @@ def char_id_y(file_obj):
         return unicode_%2325
     except:
         return -1
+def char_from_id(char_id):
+    unicode_ = char_id + 2325
+    return unichr(unicode_)
+
 def get_flattened_image(file_obj, resolution):
     x,y = resolution
     feature_vector_list = []

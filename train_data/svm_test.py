@@ -11,4 +11,6 @@ print result
 print test_Y
 mask = result[1] == test_Y
 correct = np.count_nonzero(mask)
+for x in result[1]:
+    print char_from_id(x) ,
 print correct * 100.0 / 26

@@ -3,6 +3,7 @@ import os
 import numpy as np
 import cv2
 folders = ["images/", "rotated_img/", "degraded_img/"]
+folders = ["rotated_img/"]
 train_X = np.array([],dtype = "float32").reshape(-1,18*14)
 train_Y = np.array([],dtype = "float32").reshape(-1,1)
 for folder in folders:
@@ -18,7 +19,7 @@ train_X = np.float32(train_X)
 train_Y = np.int32(train_Y)
 print train_Y, train_Y.dtype
 svm = cv2.ml.SVM_create()
-svm.setKernel(cv2.ml.SVM_RBF)
+svm.setKernel(cv2.ml.SVM_LINEAR)
 svm.setType(cv2.ml.SVM_C_SVC)
 svm.setC(2.67)
 svm.setGamma(5.383)
