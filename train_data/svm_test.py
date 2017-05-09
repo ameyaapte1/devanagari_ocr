@@ -1,3 +1,8 @@
+"""
+This code takes .dat file as input
+outputs all the characters matched and prints accuracy if they are all \
+    characters from ka-ksha
+"""
 from svm_lib import *
 import numpy as np
 import sys
